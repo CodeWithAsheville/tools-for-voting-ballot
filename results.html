@@ -9,8 +9,30 @@
 <body>
 
 
+
 <div class="page">
 <div class="wrapper">
+
+	<!-- Step1 -->
+	<div class='step1'>
+		<h1>Tools for Voting!</h1>
+		<h2>Enter your Name</h2>
+		<div id='user-form'>
+			<label>Name: </label>
+			<input id='first-name' value='' placeholder="First Name" />
+			<input id='last-name' value='' placeholder="Last Name" />
+			<input type='submit' id='enter-name' value='Go!' />
+		</div>
+		<div id='results'></div>
+		<div id='single-voter-detail'>
+			<h2 class='voter-name'></h2>
+			<div id='single-voter-addditional-info'>
+
+			</div>
+
+		</div>
+	</div>
+	<!-- END Step1 -->
 
 <h1>Partisan Offices</h1>
 	<div class="ballot-container">
@@ -167,7 +189,8 @@
 </div>
 
 	<div id='results'></div>
-	<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<script type='text/javascript' src='papaparse.min.js'></script>
 	<script type='text/javascript' src='scripts.js'></script>
 	<script type='text/javascript' src='interface.js'></script>
 </body>

@@ -108,9 +108,76 @@ TFVB.processElectionLookupData = function(){
 	for(index in TFVB.election_lookup_data){
 		var row = TFVB.election_lookup_data[index];
 
-		if(! row.contest_id){
-			TFVB.election_lookup_data_processed.push(row);
+		// if(! row.contest_id){
+			if(typeof TFVB.election_lookup_data_processed[row["contest_name - original"]] == typeof undefined){
+				TFVB.election_lookup_data_processed[row["contest_name - original"]] = [];
+			}
+			TFVB.election_lookup_data_processed[row["contest_name - original"]].push(row);
+		// }
+	}
+
+	TFVB.renderElectionRaces();
+};
+
+TFVB.getPartyFromAbrev = function(input){
+	if(input == "DEM"){
+		return "democrat";
+	}
+	else if(input == "REP"){
+		return "republican";
+	}
+	else if(input == "LIB"){
+		return "libertarian";
+	}
+	else{
+		return "";
+	}
+}
+
+TFVB.renderElectionRaces = function(){
+	var candiate_template = $(".ballot-section-options").find('li').eq(0).clone();
+	$(".ballot-section-options").find('li').remove();
+
+	var ballot_section_template = $(".ballot-section").clone();
+	$(".ballot-section").remove();
+
+	for(election_race_name in TFVB.election_lookup_data_processed){
+		var election_race = TFVB.election_lookup_data_processed[election_race_name];
+		var active_section = ballot_section_template.clone();
+
+		for(candidate_index in election_race){
+			candidate = election_race[candidate_index];
+			console.log('candidate', candidate);
+
+			var active_candidate = candiate_template.clone();
+			active_candidate.find('.candidate-name').html(candidate.name_on_ballot);
+			active_candidate.find('.candidate-party').html(TFVB.getPartyFromAbrev(candidate.party_candidate) );
+
+			var xpress_link = "<a href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
+			xpress_link += "Search on Mountain Xpress";
+			xpress_link += "</a>";
+
+			var blade_link = "<a href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
+			blade_link += "Search on Asheville Blade";
+			blade_link += "</a>";
+
+			var act_link = "<a href='http://http://www.citizen-times.com/search/" + candidate.name_on_ballot + "'>";
+			act_link += "Search on Asheville Citizen Times ";
+			act_link += "</a>";
+
+			active_candidate.find('.candidate-info p').html("");
+			active_candidate.find('.candidate-info p').append(blade_link );
+			active_candidate.find('.candidate-info p').append(act_link );
+			active_candidate.find('.candidate-info p').append(xpress_link );
+
+			active_candidate.removeClass('selected').addClass(TFVB.getPartyFromAbrev(candidate.party_candidate));
+			active_section.find('ul').append(active_candidate);
+
 		}
+
+		active_section.find('h2').html(election_race_name);
+
+		$(".ballot-container").append(active_section);
 	}
 };
 
@@ -120,6 +187,8 @@ TFVB.loadElectionLookupData = function(){
 		TFVB.election_lookup_data = temp.data;
 
 		console.log('election lookup data', TFVB.election_lookup_data);
+
+		TFVB.processElectionLookupData();
 	});
 };
 
