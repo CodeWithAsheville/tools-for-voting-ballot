@@ -1,0 +1,147 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Raleway;
+}
+
+body, p, td, th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+    width: 1170px;
+    margin: 0 auto;
+    background-color: #fff;
+    clear: both;
+    height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.ballot-container {
+
+}
+
+.ballot-section {
+
+}
+
+.ballot-section-info {
+
+}
+
+.ballot-section-options li {
+
+}
+
+/*PARTY AFFILIATIONS*/
+.ballot-section-options li.selected{
+    color: white !important;
+}
+
+.ballot-section-options li.republican{
+    border: 2px solid #ff4000;
+    color: #ff4000;
+}
+
+.ballot-section-options li.republican.selected{
+    background: #ff4000;
+}
+
+.ballot-section-options li.democrat{
+    border: 2px solid #0051bf;
+    color: #0051bf;
+}
+
+.ballot-section-options li.democrat.selected{
+    background: #0051bf;
+}
+
+.ballot-section-options li.libertarian{
+    border: 2px solid #e9b600;
+    color: #e9b600;
+}
+
+.ballot-section-options li.libertarian.selected{
+    background: #e9b600;
+}
+
+.ballot-section-options li.unaffiliated{
+    border: 2px solid brown;
+    color: brown;
+}
+
+.ballot-section-options li.unaffiliated.selected{
+    background: brown;
+}
+/*END PARTY AFFILIATIONS*/
+
+h3.candidate-name {
+	width: 100%;
+}
+
+.candidate {
+	display: inline-block;
+	position: relative;
+}
+
+.candidate-info-container {
+	width: 100%;
+    text-align: center;
+}
+
+.candidate-info-container p {
+	text-align: left;
+}
+
+.candidate-info-learnmore {
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.candidate-info-learnmore a {
+	text-transform: uppercase;
+	text-decoration: none;
+	color: white;
+	font-size: .8em;
+	width: auto !important;
+    height: auto !important;
+    background: rgba(0,0,0,0.1) !important;
+    padding: 1.5em !important;
+    text-shadow: none !important;
+}
+
+.candidate-info-learnmore:after {
+	content: "\2304" !important;
+    display: block;
+    font-size: 2em;
+    line-height: .5em;
+}
+
+
+.ballot-section-options>ul>li {
+	list-style: none;
+	/*background: #666;*/
+	padding: .2em .5em;
+	margin: .5em auto;
+	border-radius: .2em;
+
+}
+
+li.democrat {
+
+}
+
+li.libertarian {
+
+}
+
+li.unaffiliated {
+
+}
