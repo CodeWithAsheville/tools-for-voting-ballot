@@ -39,6 +39,48 @@ body, p, td, th {
 
 }
 
+/*PARTY AFFILIATIONS*/
+.ballot-section-options li.selected{
+    color: white !important;
+}
+
+.ballot-section-options li.republican{
+    border: 2px solid #ff4000;
+    color: #ff4000;
+}
+
+.ballot-section-options li.republican.selected{
+    background: #ff4000;
+}
+
+.ballot-section-options li.democrat{
+    border: 2px solid #0051bf;
+    color: #0051bf;
+}
+
+.ballot-section-options li.democrat.selected{
+    background: #0051bf;
+}
+
+.ballot-section-options li.libertarian{
+    border: 2px solid #e9b600;
+    color: #e9b600;
+}
+
+.ballot-section-options li.libertarian.selected{
+    background: #e9b600;
+}
+
+.ballot-section-options li.unaffiliated{
+    border: 2px solid brown;
+    color: brown;
+}
+
+.ballot-section-options li.unaffiliated.selected{
+    background: brown;
+}
+/*END PARTY AFFILIATIONS*/
+
 h3.candidate-name {
 	width: 100%;
 }
@@ -47,16 +89,17 @@ h3.candidate-name:after {
 	content: "\00A0\00BB";
     color: white;
     display: inline-block;
-    text-align: right;
+    float: right;
     font-size: 2em;
+    margin-right: .5em;
 }
 
-li.republican,li.democrat,li.libertarian,li.unaffiliated {
+.ballot-section-options>ul>li {
 	list-style: none;
-	background: #666;
-	padding: .5em;
+	/*background: #666;*/
+	padding: .2em .5em;
 	margin: .5em auto;
-	border-radius: 1em;
+	border-radius: .2em;
 
 }
 
