@@ -1,15 +1,12 @@
+TFVB.selectCandidate = function(e){
+	$(this).parents('li').addClass('selected').siblings('li').removeClass('selected');
+	e.preventDefault();
+}
 
+TFVB.learnMoreCandidate = function(e){
+	$(this).parents('div').next('.candidate-info').slideToggle();
+	e.preventDefault();
+}
 
-
-
-var TFVB = {};
-
-TFVB.first_name = false;
-TFVB.last_name = false;
-TFVB.processVoterName = function(){};
-
-$("#enter-name").submit(TFVB.processVoterName);
-
-$("#first-name").change(function(){
-	alert('go', $(this).val() );
-});
+$('.select-candidate').click(TFVB.selectCandidate);
+$('.candidate-info-learnmore').click(TFVB.learnMoreCandidate);
