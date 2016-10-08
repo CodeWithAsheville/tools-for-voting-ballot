@@ -4,9 +4,9 @@ TFVB.selectCandidate = function(e){
 }
 
 TFVB.learnMoreCandidate = function(e){
-	$(this).parents('div').next('.candidate-info').slideToggle();
+	$(this).parents('div').siblings('.candidate-info').slideToggle();
 	e.preventDefault();
 }
 
 $('.select-candidate').click(TFVB.selectCandidate);
-$('.candidate-info-learnmore').click(TFVB.learnMoreCandidate);
+$('.candidate-info-learnmore a').click(TFVB.learnMoreCandidate);
