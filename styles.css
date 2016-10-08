@@ -132,6 +132,14 @@ h3.candidate-name {
     text-decoration: none !important;
 }
 
+.candidate-info p{
+    text-align: center;
+}
+
+.candidate-info a{
+    margin-right: 20px;
+}
+
 .candidate-info-learnmore:after {
 	content: "\2304" !important;
     display: block;
