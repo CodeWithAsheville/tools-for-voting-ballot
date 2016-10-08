@@ -9,7 +9,7 @@ body, p, td, th {
 }
 
 .page {
-    width: 1170px;
+    width: 100%;
     margin: 0 auto;
     background-color: #fff;
     clear: both;
@@ -40,6 +40,10 @@ body, p, td, th {
 }
 
 /*PARTY AFFILIATIONS*/
+.ballot-section-options ul{
+    padding-left: 0px;
+}
+
 .ballot-section-options li.selected,
 .ballot-section-options li.selected *{
     color: white !important;
@@ -115,6 +119,7 @@ h3.candidate-name {
 
 .candidate-info-learnmore {
     width: 100%;
+    display: block;
     text-transform: uppercase;
     text-align: center;
 }
@@ -132,11 +137,19 @@ h3.candidate-name {
     text-decoration: none !important;
 }
 
+.candidate-info p{
+    text-align: center;
+}
+
+.candidate-info a{
+    margin-right: 20px;
+}
+
 .candidate-info-learnmore:after {
-	content: "\2304" !important;
-    display: block;
-    font-size: 2em;
-    line-height: .5em;
+	/*content: "\2304" !important;*/
+    /*display: block;*/
+    /*font-size: 2em;*/
+    /*line-height: .5em;*/
 }
 
 
@@ -162,4 +175,50 @@ li.libertarian {
 
 li.unaffiliated {
 
+}
+
+@media print {
+    .step1{
+        display: none;
+    }
+    .ballot-container{
+        display: inline-block;
+        float: left;
+        width: 30%;
+        margin-right: 3.33%;
+    }
+    .ballot-section{
+        clear: both;
+        display: block;
+        overflow: hidden;
+    }
+    .ballot-section-options ul{
+        display: block;
+        clear: both;
+    }
+    .ballot-section h2{
+        display: inline-block;
+        float: left;
+    }
+   .ballot-section-options li{
+        display: none;
+        border: none !important;
+        padding: 5px !important;
+        margin: 5px !important;
+   }
+   .ballot-section-options li.selected{
+        display: inline;
+        float: left;
+   }
+   .candidate-info-learnmore{
+        display: none;
+   }
+   .actions{
+        display: none;
+   }
+   h1, h2, h3, h4, h5, h6{
+        font-size: 1em;
+        margin-bottom: 5px;
+        margin: 0px !important;
+   }
 }

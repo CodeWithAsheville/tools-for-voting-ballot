@@ -8,5 +8,5 @@ TFVB.learnMoreCandidate = function(e){
 	e.preventDefault();
 }
 
-$('.select-candidate').click(TFVB.selectCandidate);
-$('.candidate-info-learnmore a').click(TFVB.learnMoreCandidate);
+$(document).on('click', '.select-candidate', TFVB.selectCandidate);
+$(document).on('click', '.candidate-info-learnmore a', TFVB.learnMoreCandidate);
