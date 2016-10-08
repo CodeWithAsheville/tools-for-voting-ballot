@@ -50,7 +50,49 @@ TFVB.processVoterRowClick = function(){
 		$("#single-voter-addditional-info").append(key + ": " + row + "<br />");
 	}
 
+	TFVB.filterVoterElections();
+
 }
+
+TFVB.filterVoterElections = function(){
+
+	// nc_house_abbrv
+	var voter_nc_house_district = TFVB.voter_record.nc_house_abbrv;
+	var voter_us_house_district = TFVB.voter_record.cong_dist_abbrv;
+	var voter_nc_senate_district = TFVB.voter_record.nc_senate_abbrv;
+
+	var commissioner_district = TFVB.voter_record.county_commiss_abbrv.replace("COM", "");
+
+	var voter_education_district = TFVB.voter_record.school_dist_abbrv;
+
+
+	// data-election-name
+	// data-election-base-name
+
+	$(".ballot-section[data-election-base-name='US HOUSE OF REPRESENTATIVES']").hide();
+	$(".ballot-section[data-election-name='US HOUSE OF REPRESENTATIVES DISTRICT "+voter_us_house_district+"']").show();
+
+	$(".ballot-section[data-election-base-name='NC HOUSE OF REPRESENTATIVES DISTRICT']").hide();
+	$(".ballot-section[data-election-name='NC HOUSE OF REPRESENTATIVES DISTRICT "+voter_nc_house_district+"']").show();
+
+	$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF COMMISSIONERS']").hide();
+
+	$(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF COMMISSIONERS DISTRICT "+commissioner_district+"']").show();
+	$(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF COMMISSIONERS DISTRICT "+commissioner_district+" UNEXPIRED']").show();
+	$(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF COMMISSIONERS CHAIR']").show();
+
+
+	//nc_senate_abbrv
+	$(".ballot-section[data-election-base-name='NC STATE SENATE DISTRICT']").hide();
+	$(".ballot-section[data-election-name='NC STATE SENATE DISTRICT "+voter_nc_senate_district+"']").show();
+
+
+	$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
+	$(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
+	$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION AT- LARGE']").show();
+
+// 
+};
 
 TFVB.processVoterSearchResults = function(results){
 	console.log('results', results);
@@ -145,6 +187,10 @@ TFVB.renderElectionRaces = function(){
 		var election_race = TFVB.election_lookup_data_processed[election_race_name];
 		var active_section = ballot_section_template.clone();
 
+		// console.log('race', election_race);
+		active_section.attr('data-election-name', election_race_name);
+		active_section.attr('data-election-base-name', election_race[0]["contest_name - base"]);
+
 		for(candidate_index in election_race){
 			candidate = election_race[candidate_index];
 			console.log('candidate', candidate);
@@ -154,15 +200,15 @@ TFVB.renderElectionRaces = function(){
 			active_candidate.find('.candidate-party').html(TFVB.getPartyFromAbrev(candidate.party_candidate) );
 
 			var xpress_link = "<a href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
-			xpress_link += "Search on Mountain Xpress";
+				xpress_link += "Search on Mountain Xpress";
 			xpress_link += "</a>";
 
 			var blade_link = "<a href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
-			blade_link += "Search on Asheville Blade";
+				blade_link += "Search on Asheville Blade";
 			blade_link += "</a>";
 
-			var act_link = "<a href='http://http://www.citizen-times.com/search/" + candidate.name_on_ballot + "'>";
-			act_link += "Search on Asheville Citizen Times ";
+			var act_link = "<a href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "'>";
+				act_link += "Search on Asheville Citizen Times ";
 			act_link += "</a>";
 
 			active_candidate.find('.candidate-info p').html("");
