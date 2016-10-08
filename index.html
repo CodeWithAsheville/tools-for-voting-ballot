@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<h1>Hello world!</h1>
+	<h1>Tools for Voting!</h1>
 
 	<div id='user-form'>
 		<label>Name: </label>
@@ -13,7 +13,16 @@
 		<input type='submit' id='enter-name' value='Go!' />
 	</div>
 	<div id='results'></div>
-	<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<div id='single-voter-detail'>
+		<h2 class='voter-name'></h2>
+		<div id='single-voter-addditional-info'>
+
+		</div>
+
+	</div>
+
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<script type='text/javascript' src='papaparse.min.js'></script>
 	<script type='text/javascript' src='scripts.js'></script>
 </body>
 </html>
