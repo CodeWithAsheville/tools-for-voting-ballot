@@ -1,9 +1,15 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
+a{
+    color: #577d9a;
+    text-decoration: none;
+}
+
 h1,h2,h3,h4,h5,h6 {
 	font-family: Raleway;
     margin-top: 5px;
     margin-bottom: 5px;
+    color: #333;
 }
 
 body, p, td, th {
@@ -16,6 +22,7 @@ body, p, td, th {
     background-color: #fff;
     clear: both;
     height: 100%;
+    max-width: 1000px;
 }
 
 .wrapper {
@@ -34,13 +41,18 @@ body, p, td, th {
 }
 
 .ballot-section-info {
-
+    font-size: .8em;
+    color: #666;
 }
 
 .ballot-section-options li {
     -webkit-transition: all .2s; /* Safari */
     transition: all .2s;    
 }
+
+.candidate-party{
+    text-transform: uppercase;
+} 
 
 .ballot-section-options li input{
     width: 100%;
@@ -133,6 +145,7 @@ h3.candidate-name {
 .candidate-info-container {
 	width: 100%;
     text-align: center;
+    clear:both;
 }
 
 .candidate-info-container p {
@@ -158,7 +171,7 @@ h3.candidate-name {
     text-shadow: none !important;
     text-decoration: none !important;
     display:block;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #666;
 }
 
@@ -175,7 +188,8 @@ h3.candidate-name {
     padding: .5em;
     color: white;
     border-radius: 5px;
-    margin: 10px;
+    margin-bottom: 5px;
+    /*margin: 10px;*/
     display: inline-block;
     text-decoration: none;
 }
