@@ -1,5 +1,5 @@
 TFVB.selectCandidate = function(e){
-	$(this).parents('li').addClass('selected').siblings('li').removeClass('selected');
+	$(this).parents('li').toggleClass('selected').siblings('li').removeClass('selected');
 	e.preventDefault();
 }
 
