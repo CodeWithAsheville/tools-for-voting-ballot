@@ -219,7 +219,7 @@ TFVB.renderElectionRaces = function(){
 				blade_link += "Search on Asheville Blade";
 			blade_link += "</a>";
 
-			var act_link = "<a href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "'>";
+			var act_link = "<a href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
 				act_link += "Search on Asheville Citizen Times ";
 			act_link += "</a>";
 
