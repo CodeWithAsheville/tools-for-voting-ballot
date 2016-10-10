@@ -10,8 +10,8 @@ TFVB.voter_age = false;
 TFVB.voter_registration_api_base = "https://cfa-voting-api-2016.herokuapp.com/api";
 
 TFVB.election_description_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_races.csv";
-// TFVB.election_lookup_sheet = "https://docs.google.com/spreadsheets/d/1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM/pub?gid=20236216&single=true&output=csv";
-TFVB.election_lookup_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_lookup.csv";
+TFVB.election_lookup_sheet = "https://docs.google.com/spreadsheets/d/1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM/pub?gid=20236216&single=true&output=csv";
+// TFVB.election_lookup_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_lookup.csv";
 
 TFVB.voter_record = false;
 
