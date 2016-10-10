@@ -10,7 +10,7 @@ TFVB.voter_age = false;
 TFVB.voter_registration_api_base = "https://cfa-voting-api-2016.herokuapp.com/api";
 
 TFVB.election_description_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_races.csv";
-TFVB.election_lookup_sheet = "https://docs.google.com/spreadsheets/d/1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM/pub?gid=20236216&single=true&output=csv";
+TFVB.election_lookup_sheet = "1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM";
 // TFVB.election_lookup_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_lookup.csv";
 
 TFVB.voter_record = false;
@@ -22,18 +22,21 @@ TFVB.election_lookup_data = false;
 TFVB.election_race_info_data = false;
 
 TFVB.election_race_info_data_processed = {};
+TFVB.election_lookup_data_processed = {};
 
-TFVB.processVoterInfoResults = function(results){
 
-	console.log('results', results);
+TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc'];
 
-	if(results.length){
-		for(key in results[0]){
-			row = results[0][key];
-			$("#results").append(key + ": " + row + "<br />");
-		}
+
+TFVB.debug = true;
+TFVB.setupDebugTools = function(){
+	if(TFVB.debug){
+		$("#first-name").val("Patrick");
+		$("#last-name").val("Conant");
+
+		$("#enter-name").click();		
 	}
-};
+}
 
 TFVB.processVoterRowClick = function(){
 	var active_row = $(this);
@@ -51,10 +54,18 @@ TFVB.processVoterRowClick = function(){
 
 	for(key in TFVB.voter_record){
 		row = TFVB.voter_record[key];
-		$("#single-voter-addditional-info").append(key + ": " + row + "<br />");
+
+		console.log('check in array', $.inArray(key, TFVB.display_voter_info_keys), key)
+
+		// Temp disable
+		// if($.inArray(key, TFVB.display_voter_info_keys) > -1){
+
+			$("#single-voter-addditional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key + "</span>" + ": <span class='voter-info-value'>" + row + "</span></div>");
+		// }
 	}
 
 	TFVB.filterVoterElections();
+	$(".step2").fadeIn();
 
 }
 
@@ -148,7 +159,6 @@ TFVB.processVoterName = function(){
 	TFVB.getVoterInfo();
 };
 
-TFVB.election_lookup_data_processed = {};
 
 TFVB.processElectionLookupData = function(){
 	for(index in TFVB.election_lookup_data){
@@ -161,8 +171,6 @@ TFVB.processElectionLookupData = function(){
 			TFVB.election_lookup_data_processed[row["contest_name - original"]].push(row);
 		// }
 	}
-
-	setTimeout(TFVB.renderElectionRaces, 1000 );
 };
 
 TFVB.getPartyFromAbrev = function(input){
@@ -235,51 +243,47 @@ TFVB.renderElectionRaces = function(){
 
 		$(".ballot-container").append(active_section);
 	}
+
+	// TFVB.renderElectionRaces();
 };
 
-TFVB.loadElectionLookupData = function(){
-	$.get(TFVB.election_lookup_sheet, function(csv_data){
-		var temp = Papa.parse(csv_data, { header: true });
-		TFVB.election_lookup_data = temp.data;
-
-		console.log('election lookup data', TFVB.election_lookup_data);
-
-		TFVB.processElectionLookupData();
-	});
-};
-
-TFVB.loadRaceInfoData = function(){
-	$.get(TFVB.election_description_sheet, function(csv_data){
-		var temp = Papa.parse(csv_data, { header: true });
-		TFVB.election_race_info_data = temp.data;
-
-		console.log('election info data', TFVB.election_race_info_data);
-
-		TFVB.processElectionInfoData();
-	});
-};
 
 TFVB.processElectionInfoData = function(){
 	for(index in TFVB.election_race_info_data){
 		var row = TFVB.election_race_info_data[index];
 		// console.log('patrick', row["contest_name - original"]);
 		TFVB.election_race_info_data_processed[row["contest_name - original"]] = row;
-
-		// if(! row.contest_id){
-			// if(typeof TFVB.election_race_info_data_processed[row["contest_name - original"]] == typeof undefined){
-			// 	TFVB.election_race_info_data_processed[row["contest_name - original"]] = [];
-			// }
-			// TFVB.election_race_info_data_processed[row["contest_name - original"]].push(row);
-		// }
 	}
-
-	// TFVB.renderElectionRaces();
 };
 
 
+/// TABLETOP STUFF
+TFVB.init = function(){
+	Tabletop.init( { key: TFVB.election_lookup_sheet,
+	                 callback: TFVB.loadGoogleSpreadsheetData,
+	                 simpleSheet: false } );
+}
+
+TFVB.loadGoogleSpreadsheetData = function(data, tabletop) {
+	// alert("Successfully processed!")
+	// console.log(data);
+	console.log("Data Loaded");
+	TFVB.election_lookup_data = data.Candidates.elements;
+	TFVB.election_race_info_data = data.Races.elements;
+
+	// console.log('election lookup data', TFVB.election_lookup_data);
+
+	TFVB.processElectionLookupData();
+	TFVB.processElectionInfoData();
+
+	TFVB.renderElectionRaces();
+	TFVB.setupDebugTools();
+}
+// END TABLETOP
+
+
 // On Load, Get the lookup
-TFVB.loadElectionLookupData();
-TFVB.loadRaceInfoData();
+window.onload = function() { TFVB.init() };
 
 // Click handlers
 $("#enter-name").click(TFVB.processVoterName);
