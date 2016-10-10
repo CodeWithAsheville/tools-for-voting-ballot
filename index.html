@@ -2,27 +2,103 @@
 <head>
 	<title>Tools for Voting</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<style>
+
+	</style>
 </head>
 <body>
-	<h1>Tools for Voting!</h1>
 
-	<div id='user-form'>
-		<label>Name: </label>
-		<input id='first-name' value='' placeholder="First Name" />
-		<input id='last-name' value='' placeholder="Last Name" />
-		<input type='submit' id='enter-name' value='Go!' />
-	</div>
-	<div id='results'></div>
-	<div id='single-voter-detail'>
-		<h2 class='voter-name'></h2>
-		<div id='single-voter-addditional-info'>
+
+
+<div class="page">
+<div class="wrapper">
+
+	<!-- Step1 -->
+	<div class='step1'>
+		<h1>Tools for Voting!</h1>
+		<h2>Enter your Name</h2>
+		<div id='user-form'>
+			<label>Name: </label>
+			<input id='first-name' value='' placeholder="First Name" />
+			<input id='last-name' value='' placeholder="Last Name" />
+			<input type='submit' id='enter-name' value='Go!' />
+		</div>
+		<div id='results'></div>
+		<div id='single-voter-detail'>
+			<h2 class='voter-name'></h2>
+			<div id='single-voter-addditional-info'>
+
+			</div>
 
 		</div>
-
 	</div>
+	<!-- END Step1 -->
 
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+<h1>Partisan Offices</h1>
+	<div class="ballot-container">
+		<div class="ballot-section">
+			<h2>
+				President and Vice President of the United States (You may vote for ONE)
+			</h2>
+			<div class="ballot-section-info">
+				<span class="instructions">
+				</span>
+			</div>
+			<div class="ballot-section-options">
+				<ul>
+					<li class="republican selected">
+						<div class="candidate">
+							<h3 class="candidate-name">
+								Candidate Name
+							</h3>
+							<h4 class="candidate-party">
+								Democrat
+							</h4>
+						</div>
+						<div class="actions">
+							<a href="#" class="select-candidate">
+								Select Candidate
+							</a>
+						</div>
+						<div class="candidate-info-container">
+		
+							<div class="candidate-info-learnmore">
+								<a href="#">
+									Learn More
+								</a>
+							</div>
+
+							<div class="candidate-info">
+								<p>
+									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+								</p>
+							</div>
+						</div>
+					</li>
+					<li class="write-in">
+						<div class="candidate">
+							<h3 class="candidate-name">
+								Write In
+							</h3>
+							<input type="text" class="write-in-field">
+						</div>
+						<div class="actions">
+							<a href="#" class="select-candidate">
+								Select Candidate
+							</a>
+						</div>					
+					</li>															
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+	<div id='results'></div>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 	<script type='text/javascript' src='papaparse.min.js'></script>
 	<script type='text/javascript' src='scripts.js'></script>
+	<script type='text/javascript' src='interface.js'></script>
 </body>
 </html>
