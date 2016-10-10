@@ -181,6 +181,7 @@ TFVB.processVoterName = function(){
 
 	// $("#results").html(TFVB.first_name + ": " + TFVB.last_name);
 	TFVB.getVoterInfo();
+	return false;
 };
 
 
