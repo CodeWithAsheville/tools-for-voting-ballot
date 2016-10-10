@@ -31,8 +31,9 @@ TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc'];
 TFVB.debug = false;
 TFVB.setupDebugTools = function(){
 	if(TFVB.debug){
-		$("#first-name").val("Patrick");
-		$("#last-name").val("Conant");
+		$("#full-name").val("Patrick Conant");
+		// $("#first-name").val("Patrick");
+		// $("#last-name").val("Conant");
 
 		$("#enter-name").click();		
 	}
@@ -55,12 +56,12 @@ TFVB.processVoterRowClick = function(){
 	for(key in TFVB.voter_record){
 		row = TFVB.voter_record[key];
 
-		console.log('check in array', $.inArray(key, TFVB.display_voter_info_keys), key)
+		// console.log('check in array', $.inArray(key, TFVB.display_voter_info_keys), key)
 
 		// Temp disable
 		// if($.inArray(key, TFVB.display_voter_info_keys) > -1){
 
-			$("#single-voter-addditional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key + "</span>" + ": <span class='voter-info-value'>" + row + "</span></div>");
+			$("#single-voter-addditional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key.replace("_", " ").toUpperCase() + ":</span>" + " <span class='voter-info-value'>" + row + "</span></div>");
 		// }
 	}
 
@@ -79,6 +80,7 @@ TFVB.filterVoterElections = function(){
 	var commissioner_district = TFVB.voter_record.county_commiss_abbrv.replace("COM", "");
 
 	var voter_education_district = TFVB.voter_record.school_dist_abbrv;
+
 
 
 	// data-election-name
@@ -101,10 +103,16 @@ TFVB.filterVoterElections = function(){
 	$(".ballot-section[data-election-base-name='NC STATE SENATE DISTRICT']").hide();
 	$(".ballot-section[data-election-name='NC STATE SENATE DISTRICT "+voter_nc_senate_district+"']").show();
 
+	if(voter_education_district){
+		$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").show();
+	}
+	else{
+		$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
+	}
 
-	$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
-	$(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
-	$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION AT- LARGE']").show();
+	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
+	// $(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
+	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION AT- LARGE']").show();
 
 // 
 };
@@ -121,9 +129,10 @@ TFVB.processVoterSearchResults = function(results){
 	if(results.length){
 		for(index in results){
 			row = results[index];
+			results_div.append("<h3>Choose your name from the list below</h3>");
 
 			results_div.append("<div>" + 
-									"<div class='voter-row' data-voter-index='"+index+"' style='color: blue; text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (" + row.birth_age + ")</div>" +
+									"<div class='voter-row' data-voter-index='"+index+"' style='color: blue; text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (Age " + row.birth_age + ")</div>" +
 								"</div>"
 								);
 		}
@@ -148,14 +157,29 @@ TFVB.getVoterInfo = function(){
 };
 
 TFVB.processVoterName = function(){
-	TFVB.first_name = $("#first-name").val();
-	TFVB.last_name = $("#last-name").val();
+	$(".step2").hide();
+
+	var full_name = $("#full-name").val();
+
+	var full_name_array = full_name.split(" ");
+
+	// console.log(full_name, full_name_array);
+	if(full_name_array.length < 2){
+		alert("Please enter your full name");
+	}
+
+	TFVB.first_name = full_name_array[0];
+	TFVB.last_name = full_name_array[1];
 
 	if($("#voter-age").length){
 		TFVB.voter_age = $("#voter-age").val();
 	}
 
-	$("#results").html(TFVB.first_name + ": " + TFVB.last_name);
+	$("#results").html("Loading...");
+	$("#single-voter-detail h2").html("");
+	$("#single-voter-addditional-info").html("");
+
+	// $("#results").html(TFVB.first_name + ": " + TFVB.last_name);
 	TFVB.getVoterInfo();
 };
 

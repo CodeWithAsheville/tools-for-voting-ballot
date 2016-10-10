@@ -255,6 +255,13 @@ li.unaffiliated {
 .step1 #results, .step1 #single-voter-detail{
     text-align: left;
 }
+
+.voter-info-key{
+    font-weight: bold;
+    width: 150px;
+    display: inline-block;
+
+}
 /* End PRC */
 
 @media print {
