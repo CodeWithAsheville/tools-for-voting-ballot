@@ -137,12 +137,29 @@ h3{
 }
 
 .ballot-section-options li.unaffiliated{
-    border: 2px solid brown;
+    border: 2px solid #9c865c;
     color: #9c865c;
+}
+
+.ballot-section-options li.unaffiliated .actions a{
+    background: #9c865c;
 }
 
 .ballot-section-options li.unaffiliated.selected{
     background: #9c865c;
+}
+
+.ballot-section-options li.referendum{
+    border: 2px solid #666;
+    color: #666;
+}
+
+.ballot-section-options li.referendum .actions a{
+    background: #666;
+}
+
+.ballot-section-options li.referendum.selected{
+    background: #666;
 }
 
 .ballot-section-options li.write-in{
@@ -397,6 +414,7 @@ td{
 }
 
 .share-and-print{
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;

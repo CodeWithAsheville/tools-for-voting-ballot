@@ -66,7 +66,7 @@ TFVB.processVoterRowClick = function(){
 	}
 
 	TFVB.filterVoterElections();
-	$(".step2").fadeIn();
+	$(".step2, .share-and-print").fadeIn();
 
 }
 
@@ -184,6 +184,7 @@ TFVB.processVoterName = function(){
 	return false;
 };
 
+console.log(TFVB.election_lookup_data_processed);
 
 TFVB.processElectionLookupData = function(){
 	for(index in TFVB.election_lookup_data){
@@ -208,10 +209,18 @@ TFVB.getPartyFromAbrev = function(input){
 	else if(input == "LIB"){
 		return "libertarian";
 	}
+	else if(input == "UNA"){
+		return "unaffiliated";
+	}		
+	else if(input == "REF"){
+		return "referendum";
+	}	
 	else{
 		return "";
 	}
 }
+
+console.log('lookup: ', TFVB.election_lookup_data_processed);
 
 TFVB.renderElectionRaces = function(){
 	var candiate_template = $(".ballot-section-options").find('li').eq(0).clone();
@@ -251,10 +260,15 @@ TFVB.renderElectionRaces = function(){
 			active_candidate.find('.candidate-info p').html("");
 			active_candidate.find('.candidate-info p').append(blade_link );
 			active_candidate.find('.candidate-info p').append(act_link );
-			active_candidate.find('.candidate-info p').append(xpress_link );
+			active_candidate.find('.candidate-info p').append(xpress_link );		
 
 			active_candidate.removeClass('selected').addClass(TFVB.getPartyFromAbrev(candidate.party_candidate));
-			active_section.find('ul').append(active_candidate);
+
+			if(active_candidate.hasClass('referendum')){
+				active_candidate.find('a.select-candidate').text(active_candidate.find('.candidate-name').text());
+			}
+
+			active_section.find('ul').append(active_candidate);				
 
 		}
 

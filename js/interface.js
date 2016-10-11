@@ -1,6 +1,6 @@
 TFVB.historyState = {};
 TFVB.selectedCandidates = {};
-
+var og_tag_url = 'https://github.com/CodeForAsheville/tools-for-voting-ballot/?';
 var selected_candidate;
 var office;
 var selections_string;
@@ -48,6 +48,7 @@ console.log('loaded selections: ', TFVB.loaded_selections);
 }
 
 TFVB.populateCandidates = function(){
+	og_tag_url = 'https://github.com/CodeForAsheville/tools-for-voting-ballot/?';
 	TFVB.selectedCandidates = {};
 	selections_string = '';
 	$('.print-content tbody').empty();
@@ -69,14 +70,14 @@ TFVB.populateCandidates = function(){
 	for(var item in TFVB.selectedCandidates){
 		count++;
 		selections_string += item + '=' + TFVB.selectedCandidates[item];
-		console.log(count, selections_size);
 		if(count < selections_size){
 			selections_string += '&';
 		}
 		$('.print-content tbody').append('<tr><td>' + item + '</td><td>' + TFVB.selectedCandidates[item] + '</td></tr>');
 	}
 	window.history.pushState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
-
+	og_tag_url += encodeURI(selections_string);
+	$('meta[property=og\\:url]').attr('content', og_tag_url);
 }
 
 TFVB.activateStep1 = function(){
@@ -85,7 +86,7 @@ TFVB.activateStep1 = function(){
 
 }
 TFVB.activateStep2 = function(){
-	$(".step2").fadeIn('slow');
+	$(".step2, .share-and-print").fadeIn('slow');
 }
 
 TFVB.backToStep1 = function(){
