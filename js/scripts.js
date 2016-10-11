@@ -28,7 +28,7 @@ TFVB.election_lookup_data_processed = {};
 TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc'];
 
 
-TFVB.debug = false;
+TFVB.debug = true;
 TFVB.setupDebugTools = function(){
 	if(TFVB.debug){
 		$("#full-name").val("Patrick Conant");
@@ -59,10 +59,10 @@ TFVB.processVoterRowClick = function(){
 		// console.log('check in array', $.inArray(key, TFVB.display_voter_info_keys), key)
 
 		// Temp disable
-		// if($.inArray(key, TFVB.display_voter_info_keys) > -1){
+		if($.inArray(key, TFVB.display_voter_info_keys) > -1){
 
 			$("#single-voter-addditional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key.replace("_", " ").toUpperCase() + ":</span>" + " <span class='voter-info-value'>" + row + "</span></div>");
-		// }
+		}
 	}
 
 	TFVB.filterVoterElections();
@@ -233,7 +233,7 @@ TFVB.renderElectionRaces = function(){
 			// console.log('candidate', candidate);
 
 			var active_candidate = candiate_template.clone();
-			active_candidate.find('.candidate-name').html(candidate.name_on_ballot);
+			active_candidate.find('.candidate-name').html(candidate.name_on_ballot).attr('data-candidate-name', candidate.name_on_ballot);
 			active_candidate.find('.candidate-party').html(TFVB.getPartyFromAbrev(candidate.party_candidate) );
 
 			var xpress_link = "<a href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
@@ -308,7 +308,7 @@ TFVB.loadGoogleSpreadsheetData = function(data, tabletop) {
 
 
 // On Load, Get the lookup
-window.onload = function() { TFVB.init() };
+window.onload = function() { TFVB.init(); };
 
 // Click handlers
 $("#enter-name").click(TFVB.processVoterName);

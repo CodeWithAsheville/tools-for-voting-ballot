@@ -1,5 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
+body, html{
+    margin: 0;
+}
+
 a{
     color: #577d9a;
     text-decoration: none;
@@ -30,6 +34,9 @@ body, p, td, th {
     height: auto !important;
     height: 100%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
 }
 
 .ballot-container {
@@ -239,10 +246,14 @@ li.unaffiliated {
 }
 
 /* PRC Adding styles for Step1 */
+.wrapper{
+
+}
+
 .step1{
     display: none;
     text-align: center;
-    margin: 40px auto;
+    margin: auto;
     width: 80%;
 }
 
@@ -258,9 +269,54 @@ li.unaffiliated {
 
 .voter-info-key{
     font-weight: bold;
-    width: 150px;
+    font-size: .8em;
+    width: 200px;
     display: inline-block;
+}
 
+.voter-info-value{
+    font-size: .8em;
+}
+
+.step1{
+
+}
+
+.step1 form{
+    background: #eee;
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+    border-radius: 5px;
+}
+
+.step1 form h1, h2{
+    margin-bottom: 10px;
+}
+
+.step1 #single-voter-detail{
+    /*display: none;*/
+}
+
+form input[type="text"]{
+    min-height: 30px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+form input[type="submit"]{
+    padding: 10px;
+    border: none;
+    text-transform: uppercase;
+    background: green;
+    color: white;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover{
+    background: blue;
 }
 /* End PRC */
 
