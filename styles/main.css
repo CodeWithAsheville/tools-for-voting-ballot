@@ -4,6 +4,9 @@ body, html{
     margin: 0;
 }
 
+thead {display: table-header-group; position: relative;}
+tfoot {display: table-header-group; position: relative;}
+
 a{
     color: #577d9a;
     text-decoration: none;
@@ -135,11 +138,11 @@ h3{
 
 .ballot-section-options li.unaffiliated{
     border: 2px solid brown;
-    color: brown;
+    color: #9c865c;
 }
 
 .ballot-section-options li.unaffiliated.selected{
-    background: brown;
+    background: #9c865c;
 }
 
 .ballot-section-options li.write-in{
@@ -359,6 +362,45 @@ form input[type="submit"]:hover{
     background: blue;
 }
 /* End PRC */
+table{
+    border-collapse: collapse;
+}
+
+td{
+    padding: 2px;
+}
+
+/*PRINT*/
+
+.print-content{
+    display: none;
+}
+
+.print-content td{
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.print-content thead{
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+}
+
+.print-button a{
+    padding: 10px;
+    background: green;
+    color: white;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
+.share-and-print{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
 
 @media print {
     .step1{
@@ -404,4 +446,16 @@ form input[type="submit"]:hover{
         margin-bottom: 5px;
         margin: 0px !important;
    }
+   .wrapper{
+    display: none;
+   }
+   .print-content{
+    display: block;
+   }
+   .print-button{
+    display: none;
+   }
+    .share-and-print{
+
+    }   
 }
