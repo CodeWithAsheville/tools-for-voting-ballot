@@ -51,19 +51,30 @@ console.log('loaded selections: ', TFVB.loaded_selections);
 }
 
 TFVB.populateCandidates = function(){
+	TFVB.selectedCandidates = {};
 	selections_string = '';
 
 	$('.ballot-section').each(function(){
 		office = $(this).attr('data-election-name');
-		selected_candidate = $(this).find('.selected').find('.candidate-name').text();		
+		selected_candidate = $(this).find('.selected').find('.candidate-name').text();	
 
-		if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
-			TFVB.selectedCandidates[office] = selected_candidate; 
+		if(selected_candidate){
+			if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
+				TFVB.selectedCandidates[office] = selected_candidate; 
+			}
 		}
 	});
 
+	var count = 0;
+	var selections_size = Object.keys(TFVB.selectedCandidates).length;
+	
 	for(var item in TFVB.selectedCandidates){
-		selections_string += item + '=' + TFVB.selectedCandidates[item] + '&';
+		count++;
+		selections_string += item + '=' + TFVB.selectedCandidates[item];
+		console.log(count, selections_size);
+		if(count < selections_size){
+			selections_string += '&';
+		}
 	}
 	window.history.pushState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
 }
@@ -82,7 +93,7 @@ TFVB.backToStep1 = function(){
 		$(".step1").fadeIn('slow');
 		$("#full-name").focus();
 		window.history.pushState("test123", "test1234", window.location.pathname);
-
+		$('li.selected').removeClass('selected');
 	});
 };
 

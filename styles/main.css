@@ -263,6 +263,17 @@ li.unaffiliated {
 /* PRC Adding styles for Step2 */
 .step2{
     padding: 10px 50px;
+    max-width: 90%;
+}
+
+@media(max-width: 720px){
+    .step2{
+        padding: 20px 0px;
+        margin: auto;
+    }
+    h1{
+        font-size: 16px;
+    }
 }
 
 .back-to-step1{
