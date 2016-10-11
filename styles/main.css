@@ -17,8 +17,24 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 body, p, td, th {
+    /* Trying Raleway throughout */
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Let's define headers */
+h1{
+    font-size: 1.2em;
+}
+
+h2{
+    font-size: 1.0em;
+}
+
+
+h3{
+    font-size: 0.8em;
+}
+/* Let's define headers */
 
 .page {
     width: 100%;
@@ -244,7 +260,16 @@ li.libertarian {
 li.unaffiliated {
 
 }
+/* PRC Adding styles for Step2 */
+.step2{
+    padding: 10px 50px;
+}
 
+.back-to-step1{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
 /* PRC Adding styles for Step1 */
 .wrapper{
 
@@ -255,6 +280,10 @@ li.unaffiliated {
     text-align: center;
     margin: auto;
     width: 80%;
+}
+
+.step1 img{
+    max-width: 250px;
 }
 
 .step1 #enter-name{
@@ -286,7 +315,7 @@ li.unaffiliated {
     background: #eee;
     width: 50%;
     margin: auto;
-    padding: 50px;
+    padding: 20px 50px;
     border-radius: 5px;
 }
 

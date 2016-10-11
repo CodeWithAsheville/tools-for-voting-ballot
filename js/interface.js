@@ -4,11 +4,23 @@ TFVB.selectedCandidates = {};
 var selected_candidate;
 var office;
 var selections_string;
-var loaded_selections = {};
+TFVB.loaded_selections = {};
+
+TFVB.prePopulateMode = false;
 
 TFVB.decodeURL = function(){
   //query given index.html?this=true&that=good;
+
+  if(location.href.indexOf("?") == -1){
+  	return;
+  }
+
   var url = location.href.split("?")[1]; // this=true&that=good;
+
+  if(! url){
+  	return;
+  }
+
   params = {}; //init param obj
   url = url.split("&"); // ['this=true','that=good']
   for(var i = 0; i<url.length; i++){
@@ -20,12 +32,20 @@ TFVB.decodeURL = function(){
   return params; // {this:"true", that:"good"}
 }
 
-console.log('loaded selections: ', loaded_selections);
+// console.log('loaded selections: ', TFVB.loaded_selections);
 
 TFVB.prePopulate = function(){
-	for(var item in loaded_selections){
-		if(loaded_selections[item]){
-			$('[data-election-name="'+item+'"]').find('[data-candidate-name="'+loaded_selections[item]+'"]').parents('li').find('a.select-candidate').trigger('click');
+console.log('loaded selections: ', TFVB.loaded_selections);
+	for(var item in TFVB.loaded_selections){
+		if(TFVB.loaded_selections[item]){
+			var search_elm = $('[data-election-name="'+item+'"]').find('[data-candidate-name="'+TFVB.loaded_selections[item]+'"]').parents('li').find('a.select-candidate');
+
+			if(search_elm.length){
+				search_elm.trigger('click');
+			  	TFVB.prePopulateMode = true;
+			  }
+
+
 		}
 	}
 }
@@ -50,7 +70,22 @@ TFVB.populateCandidates = function(){
 
 TFVB.activateStep1 = function(){
 	$(".step1").fadeIn('slow');
+	$("#full-name").focus();
+
 }
+TFVB.activateStep2 = function(){
+	$(".step2").fadeIn('slow');
+}
+
+TFVB.backToStep1 = function(){
+	$(".step2").fadeOut('fast', function(){
+		$(".step1").fadeIn('slow');
+		$("#full-name").focus();
+		window.history.pushState("test123", "test1234", window.location.pathname);
+
+	});
+};
+
 
 TFVB.selectCandidate = function(e){
 	$(this).parents('li').toggleClass('selected').siblings('li').removeClass('selected');
@@ -65,9 +100,17 @@ TFVB.learnMoreCandidate = function(e){
 
 $(document).on('click', '.select-candidate', TFVB.selectCandidate);
 $(document).on('click', '.candidate-info-learnmore a', TFVB.learnMoreCandidate);
+$(document).on('click', '.back-to-step1', TFVB.backToStep1);
 
 $(document).ready(function(){
-	TFVB.activateStep1();
-	loaded_selections = TFVB.decodeURL();
-	TFVB.prePopulate();
+	TFVB.loaded_selections = TFVB.decodeURL();
+	// TFVB.prePopulate();
+
+	if(TFVB.prePopulateMode ){
+		// TFVB.activateStep2();
+
+	}
+	else{
+		// TFVB.activateStep1();
+	}
 });

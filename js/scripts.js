@@ -303,6 +303,17 @@ TFVB.loadGoogleSpreadsheetData = function(data, tabletop) {
 
 	TFVB.renderElectionRaces();
 	TFVB.setupDebugTools();
+
+	TFVB.loaded_selections = TFVB.decodeURL();
+	TFVB.prePopulate();
+	if(TFVB.prePopulateMode ){
+		TFVB.activateStep2();
+	}
+	else{
+		TFVB.activateStep1();
+
+	}
+
 }
 // END TABLETOP
 
