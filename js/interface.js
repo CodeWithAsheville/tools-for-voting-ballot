@@ -28,7 +28,6 @@ TFVB.prePopulate = function(){
 			$('[data-election-name="'+item+'"]').find('[data-candidate-name="'+loaded_selections[item]+'"]').parents('li').find('a.select-candidate').trigger('click');
 		}
 	}
-	// return TFVB.populateCandidates();
 }
 
 TFVB.populateCandidates = function(){
@@ -46,8 +45,7 @@ TFVB.populateCandidates = function(){
 	for(var item in TFVB.selectedCandidates){
 		selections_string += item + '=' + TFVB.selectedCandidates[item] + '&';
 	}
-	window.history.replaceState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
-	loaded_selections = TFVB.decodeURL();
+	window.history.pushState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
 }
 
 TFVB.activateStep1 = function(){

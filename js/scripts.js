@@ -28,7 +28,7 @@ TFVB.election_lookup_data_processed = {};
 TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc'];
 
 
-TFVB.debug = true;
+TFVB.debug = false;
 TFVB.setupDebugTools = function(){
 	if(TFVB.debug){
 		$("#full-name").val("Patrick Conant");
