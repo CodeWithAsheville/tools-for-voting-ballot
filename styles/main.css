@@ -26,16 +26,20 @@ body, p, td, th {
 
 /* Let's define headers */
 h1{
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 h2{
-    font-size: 1.0em;
+    font-size: 1.2em;
 }
 
 
 h3{
-    font-size: 0.8em;
+    font-size: 1em;
+}
+
+h4{
+    font-size: .8em;
 }
 /* Let's define headers */
 
@@ -56,6 +60,58 @@ h3{
     display: flex;
     align-items: center;
     flex-flow: row wrap;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.button{
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    max-width: 300px;
+}
+
+@media(max-width: 720px){
+    .button{
+        width: 90%;
+        display: block;
+        margin-top: 10px;
+    }
+}
+
+.ui-description{
+    padding: 10px;
+    font-size: .8em;
+    color: #666;
+    border: 1px solid #ccc;
+    margin: 20px 0px;
+}
+
+.button span{
+    font-size: .8em;
+    vertical-align: middle;
+}
+
+.button.blue{
+    background: #005b80;
+}
+
+.button.blue:hover{
+    background: #01364c;
+}
+
+.button.green{
+    background: #1a730c;
+}
+
+.button.green:hover{
+    background: #114a08;
 }
 
 .ballot-container {
@@ -97,6 +153,7 @@ h3{
     color: white !important;
 }
 
+/*REPUBLICAN*/
 .ballot-section-options li.republican{
     border: 2px solid #ff4000;
     color: #ff4000;
@@ -106,10 +163,15 @@ h3{
     background: #ff4000;
 }
 
+.ballot-section-options li.republican .actions a:hover{
+    background: #ab2c02;
+}
+
 .ballot-section-options li.republican.selected{
     background: #ff4000;
 }
 
+/*DEMOCRAT*/
 .ballot-section-options li.democrat{
     border: 2px solid #0051bf;
     color: #0051bf;
@@ -119,17 +181,18 @@ h3{
     background: #0051bf;
 }
 
+.ballot-section-options li.democrat .actions a:hover{
+    background: #023273;
+}
+
 .ballot-section-options li.democrat.selected{
     background: #0051bf;
 }
 
+/*LIBERTARIAN*/
 .ballot-section-options li.libertarian{
     border: 2px solid #e9b600;
     color: #e9b600;
-}
-
-.ballot-section-options li.libertarian .actions a{
-    background: #e9b600;
 }
 
 .ballot-section-options li.libertarian.selected{
@@ -232,9 +295,10 @@ h3.candidate-name {
     color: white;
     border-radius: 5px;
     margin-bottom: 5px;
-    /*margin: 10px;*/
     display: inline-block;
     text-decoration: none;
+    min-width: 120px;
+    text-align: center;    
 }
 
 .candidate-info p{
@@ -297,9 +361,12 @@ li.unaffiliated {
 }
 
 .back-to-step1{
-    cursor: pointer;
-    text-decoration: underline;
-    color: blue;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+/*    cursor: pointer;
+    text-decoration: underline;*/
+    /*color: blue;*/
 }
 /* PRC Adding styles for Step1 */
 .wrapper{
@@ -310,11 +377,11 @@ li.unaffiliated {
     display: none;
     text-align: center;
     margin: auto;
-    width: 80%;
+    width: 90%;
 }
 
 .step1 img{
-    max-width: 250px;
+    max-width: 300px;
 }
 
 .step1 #enter-name{
@@ -344,7 +411,7 @@ li.unaffiliated {
 
 .step1 form{
     background: #eee;
-    width: 50%;
+    /*width: 50%;*/
     margin: auto;
     padding: 20px 50px;
     border-radius: 5px;
@@ -394,7 +461,7 @@ td{
 }
 
 .print-content td{
-    font-size: 12px;
+    font-size: .8em;
     border-bottom: 1px solid #ccc;
 }
 
@@ -409,7 +476,7 @@ td{
     background: green;
     color: white;
     display: block;
-    font-size: 12px;
+    font-size: .8em;
     text-align: center;
 }
 

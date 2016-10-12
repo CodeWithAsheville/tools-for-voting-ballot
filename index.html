@@ -29,7 +29,7 @@
 						<input id='first-name' value='' placeholder="First Name" />
 						<input id='last-name' value='' placeholder="Last Name" />
  						-->
-						<input type='submit' id='enter-name' value='Go!' />
+						<input class="button blue" type='submit' id='enter-name' value='Go!' />
 					</div>
 					<div id='results'></div>
 					<div id='single-voter-detail'>
@@ -44,8 +44,16 @@
 			<!-- END Step1 -->
 
 			<div class='step2' style='display: none'>
-				<div class='back-to-step1'>< Back</div>
-				<h1>Partisan Offices</h1>
+				<div class='text-center'>
+					<div class='back-to-step1 button blue'><span>&#9664;</span> Clear Selections & Enter a New Name</div>
+					<div class='back-to-step1 button blue'>Only Show Active Selections</div>
+				</div>
+				<div class='ballot-description ui-description'>
+					<p>
+						Below are the options for your specific ballot. You may select one candidate/referenda in each section. When you're finished, click the "Print Out Your Selections" button at the bottom of the screen to get a condensed version of your selections that you can take with you to the ballot office.
+					</p>
+				</div>
+				<!-- <h1>Partisan Offices</h1> -->
 				<div class="ballot-container">
 					<div class="ballot-section">
 						<h2>

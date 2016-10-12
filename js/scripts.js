@@ -322,6 +322,7 @@ TFVB.loadGoogleSpreadsheetData = function(data, tabletop) {
 	TFVB.prePopulate();
 	if(TFVB.prePopulateMode ){
 		TFVB.activateStep2();
+		$('.ballot-description').hide();
 	}
 	else{
 		TFVB.activateStep1();
