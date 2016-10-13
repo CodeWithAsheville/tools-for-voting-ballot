@@ -25,7 +25,7 @@ TFVB.election_race_info_data_processed = {};
 TFVB.election_lookup_data_processed = {};
 
 
-TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc'];
+TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc', 'birth_age', 'dist_1_desc', 'dist_2_desc', 'mail_addr1', 'mail_city', 'mail_state', 'mail_zip', 'school_dist_abbrv', 'voter_reg_num'];
 
 
 TFVB.debug = false;
@@ -49,7 +49,8 @@ TFVB.processVoterRowClick = function(){
 
 
 	$("#single-voter-detail").find('.voter-name').html(TFVB.voter_record.first_name + " " +TFVB.voter_record.last_name);
-
+	$("#single-voter-detail h2").html("");
+	$("#single-voter-addditional-info").html("");
 
 	// Start the lookup! 
 
@@ -127,9 +128,14 @@ TFVB.processVoterSearchResults = function(results){
 	results_div.html("");
 
 	if(results.length){
+		results_div.append("<h3>Choose your name from the list below:</h3>");
 		for(index in results){
 			row = results[index];
-			results_div.append("<h3>Choose your name from the list below</h3>");
+
+			// Remove inactivate results
+			if(row.voter_status_desc != "ACTIVE"){
+				continue;
+			}
 
 			results_div.append("<div>" + 
 									"<div class='voter-row' data-voter-index='"+index+"' style='color: blue; text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (Age " + row.birth_age + ")</div>" +
@@ -245,15 +251,15 @@ TFVB.renderElectionRaces = function(){
 			active_candidate.find('.candidate-name').html(candidate.name_on_ballot).attr('data-candidate-name', candidate.name_on_ballot);
 			active_candidate.find('.candidate-party').html(TFVB.getPartyFromAbrev(candidate.party_candidate) );
 
-			var xpress_link = "<a href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
+			var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
 				xpress_link += "Search on Mountain Xpress";
 			xpress_link += "</a>";
 
-			var blade_link = "<a href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
+			var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
 				blade_link += "Search on Asheville Blade";
 			blade_link += "</a>";
 
-			var act_link = "<a href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
+			var act_link = "<a target='_blank' href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
 				act_link += "Search on Asheville Citizen Times ";
 			act_link += "</a>";
 
@@ -275,8 +281,30 @@ TFVB.renderElectionRaces = function(){
 		active_section.find('h2').html(election_race_name);
 
 		if(typeof TFVB.election_race_info_data_processed[election_race_name] != typeof undefined){
-			active_section.find('.ballot-section-info').html(TFVB.election_race_info_data_processed[election_race_name]["Short Description of Office"] + TFVB.election_race_info_data_processed[election_race_name]["Sources"]);
-		
+			var target_elm = active_section.find('.ballot-section-info');
+			target_elm.html(TFVB.election_race_info_data_processed[election_race_name]["Short Description of Office"]);
+			
+			links = TFVB.election_race_info_data_processed[election_race_name]["Sources"].split(" ");
+			// console.log(links);
+
+			link_html = "<h2>Sources:</h2>";
+
+			link_html += "<ul class='election-description-link-list'>";
+
+			var link_match = false;
+			for(index in links){
+				link = links[index];
+				if(link.indexOf('http') != -1){
+					link_match = true;
+					link_html += "<li><a target='_blank' href='" + link + "'>" + link + "</a></li>";
+				}
+			}
+			link_html += "</ul>";
+
+			if(link_match){
+				target_elm.append(link_html);
+			}
+
 
 		}
 

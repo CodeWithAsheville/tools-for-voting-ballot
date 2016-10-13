@@ -544,3 +544,12 @@ td{
 
     }   
 }
+
+.election-description-link-list{
+    overflow: hidden;
+    
+}
+.election-description-link-list li{
+    display: inline-block;
+    float: left;
+}

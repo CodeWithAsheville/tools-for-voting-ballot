@@ -36,7 +36,12 @@ TFVB.decodeURL = function(){
 
 TFVB.prePopulate = function(){
 console.log('loaded selections: ', TFVB.loaded_selections);
+
+	$('.ballot-section').hide();
+
 	for(var item in TFVB.loaded_selections){
+			$(".ballot-section[data-election-name='" + item + "']").show();
+
 		if(TFVB.loaded_selections[item]){
 			var search_elm = $('[data-election-name="'+item+'"]').find('[data-candidate-name="'+TFVB.loaded_selections[item]+'"]').parents('li').find('a.select-candidate');
 			if(search_elm.length){
@@ -48,20 +53,27 @@ console.log('loaded selections: ', TFVB.loaded_selections);
 }
 
 TFVB.populateCandidates = function(){
-	og_tag_url = 'https://github.com/CodeForAsheville/tools-for-voting-ballot/?';
+	og_tag_url = 'https://codeforasheville.github.io/tools-for-voting-ballot/index.html?';
 	TFVB.selectedCandidates = {};
 	selections_string = '';
 	$('.print-content tbody').empty();
 
-	$('.ballot-section').each(function(){
+	if(! $('.ballot-section:visible').length){
+		return;
+	}
+
+	$('.ballot-section:visible').each(function(){
 		office = $(this).attr('data-election-name');
 		selected_candidate = $(this).find('.selected').find('.candidate-name').text();	
 
-		if(selected_candidate){
-			if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
-				TFVB.selectedCandidates[office] = selected_candidate; 
-			}
+		if(! selected_candidate){
+			selected_candidate = "null";
 		}
+		// if(selected_candidate){
+			// if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
+				TFVB.selectedCandidates[office] = selected_candidate; 
+			// }
+		// }
 	});
 
 	var count = 0;
@@ -77,7 +89,10 @@ TFVB.populateCandidates = function(){
 	}
 	window.history.pushState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
 	og_tag_url += encodeURI(selections_string);
+
+	og_tag_url = "http://manet-8190b033-1.46ae6747.cont.dockerapp.io:32782/?delay=3000&url=" + og_tag_url;
 	$('meta[property=og\\:url]').attr('content', og_tag_url);
+	$('.share-button').attr('href', og_tag_url);
 }
 
 TFVB.activateStep1 = function(){
