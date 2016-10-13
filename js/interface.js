@@ -157,15 +157,7 @@ $(document).on('click', '.print-button', TFVB.printMode);
 
 $(document).ready(function(){
 	TFVB.loaded_selections = TFVB.decodeURL();
-	// TFVB.prePopulate();
 
-	if(TFVB.prePopulateMode ){
-		// TFVB.activateStep2();
-
-	}
-	else{
-		// TFVB.activateStep1();
-	}
 	$(".share-and-print").stick_in_parent({
 		// offset_top: '100%'
 	});
