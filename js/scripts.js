@@ -8,6 +8,7 @@ TFVB.first_name = false;
 TFVB.last_name = false;
 TFVB.voter_age = false;
 TFVB.voter_registration_api_base = "https://cfa-voting-api-2016.herokuapp.com/api";
+TFVB.voter_ballot_api_call = "/ballot";
 
 TFVB.election_description_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_races.csv";
 TFVB.election_lookup_sheet = "1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM";
@@ -25,7 +26,7 @@ TFVB.election_race_info_data_processed = {};
 TFVB.election_lookup_data_processed = {};
 
 
-TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc', 'birth_age', 'dist_1_desc', 'dist_2_desc', 'mail_addr1', 'mail_city', 'mail_state', 'mail_zip', 'school_dist_abbrv', 'voter_reg_num'];
+TFVB.display_voter_info_keys = ['id','cong_dist_abbrv', 'county_id', 'county_desc', 'birth_age', 'dist_1_desc', 'dist_2_desc', 'mail_addr1', 'mail_city', 'mail_state', 'mail_zip', 'school_dist_abbrv', 'voter_reg_num'];
 
 
 TFVB.debug = true;
@@ -38,6 +39,19 @@ TFVB.setupDebugTools = function(){
 		$("#enter-name").click();		
 	}
 }
+
+TFVB.setVoterBallotURL = function(response){
+	console.log('ballot response', response);
+
+};
+
+TFVB.getVoterBallot = function(){
+	var voter_api_request_url = TFVB.voter_registration_api_base + TFVB.voter_ballot_api_call + "?voternum="+TFVB.voter_record.id;
+	
+	console.log('voter ballot call', voter_api_request_url);
+
+	$.get(voter_api_request_url, TFVB.setVoterBallotURL);
+};
 
 TFVB.processVoterRowClick = function(){
 	var active_row = $(this);

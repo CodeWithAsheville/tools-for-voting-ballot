@@ -36,14 +36,18 @@ TFVB.decodeURL = function(){
 
 TFVB.prePopulate = function(){
 console.log('loaded selections: ', TFVB.loaded_selections);
+	
+	if(typeof TFVB.loaded_selections == typeof undefined){
+		return;
+	}
 
 	$('.ballot-section').hide();	
 
 	for(var item in TFVB.loaded_selections){
-
-		if(TFVB.loaded_selections[item] !== 'null'){
+		// console.log('test123', item);
+		// if(TFVB.loaded_selections[item] !== 'null'){
 			$(".ballot-section[data-election-name='" + item + "']").fadeIn();
-		}
+		// }
 
 		if(TFVB.loaded_selections[item] && TFVB.loaded_selections[item] !== 'null'){
 			var search_elm = $('[data-election-name="'+item+'"]').find('[data-candidate-name="'+TFVB.loaded_selections[item]+'"]').parents('li').find('a.select-candidate');
@@ -70,7 +74,7 @@ TFVB.populateCandidates = function(){
 		selected_candidate = $(this).find('.selected').find('.candidate-name').text();	
 
 		if(! selected_candidate){
-			selected_candidate = "null";
+			selected_candidate = "";
 		}
 		// if(selected_candidate){
 			// if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
@@ -104,9 +108,9 @@ TFVB.populateCandidates = function(){
 
 TFVB.populatePrint = function(object, key){
 	console.log('populate print: ' + object[key]);
-	if(object[key] !== 'null'){
+	// if(object[key] !== 'null'){
 		$('.print-content tbody').append('<tr><td>' + key + '</td><td>' + object[key] + '</td></tr>');
-	}
+	// }
 }
 
 TFVB.activateStep1 = function(){
