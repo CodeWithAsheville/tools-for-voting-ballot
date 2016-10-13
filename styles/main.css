@@ -574,3 +574,9 @@ footer{
     text-align: center;
     background: #eee;
 }
+
+
+.sample-ballot-button-container{
+    margin-top: 10px;
+    display: none;
+}

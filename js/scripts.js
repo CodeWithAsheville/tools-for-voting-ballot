@@ -43,10 +43,14 @@ TFVB.setupDebugTools = function(){
 TFVB.setVoterBallotURL = function(response){
 	console.log('ballot response', response);
 
+	$(".sample-ballot-button").attr('href', response.ballot);
+
+	$(".sample-ballot-button-container").fadeIn();
+
 };
 
 TFVB.getVoterBallot = function(){
-	var voter_api_request_url = TFVB.voter_registration_api_base + TFVB.voter_ballot_api_call + "?voternum="+TFVB.voter_record.id;
+	var voter_api_request_url = TFVB.voter_registration_api_base + TFVB.voter_ballot_api_call + "?voternum="+TFVB.voter_record.voter_reg_num;
 	
 	console.log('voter ballot call', voter_api_request_url);
 
@@ -79,6 +83,8 @@ TFVB.processVoterRowClick = function(){
 			$("#single-voter-additional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key.replace("_", " ").toUpperCase() + ":</span>" + " <span class='voter-info-value'>" + row + "</span></div>");
 		}
 	}
+
+	TFVB.getVoterBallot();
 
 	TFVB.filterVoterElections();
 	$(".step2").fadeIn();
