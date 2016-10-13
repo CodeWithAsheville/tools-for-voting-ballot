@@ -29,7 +29,7 @@ TFVB.election_lookup_data_processed = {};
 TFVB.display_voter_info_keys = ['id','cong_dist_abbrv', 'county_id', 'county_desc', 'birth_age', 'dist_1_desc', 'dist_2_desc', 'mail_addr1', 'mail_city', 'mail_state', 'mail_zip', 'school_dist_abbrv', 'voter_reg_num'];
 
 
-TFVB.debug = true;
+TFVB.debug = false;
 TFVB.setupDebugTools = function(){
 	if(TFVB.debug){
 		$("#full-name").val("Jesse Michel");
