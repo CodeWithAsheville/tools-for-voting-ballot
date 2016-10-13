@@ -100,7 +100,7 @@ TFVB.populateCandidates = function(){
 	og_tag_url += encodeURI(selections_string);
 
 
-	og_tag_url = "http://manet-8190b033-1.46ae6747.cont.dockerapp.io:32782/?url=" + og_tag_url + "&delay=5000&force=true";
+	og_tag_url = "http://manet-8190b033-1.46ae6747.cont.dockerapp.io:32782/?url=" + encodeURIComponent(og_tag_url) + "&delay=5000&force=true";
 	$('meta[property=og\\:url]').attr('content', og_tag_url);
 	$('.share-button').attr('href', og_tag_url);
 
