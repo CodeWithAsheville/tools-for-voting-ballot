@@ -14,6 +14,39 @@
 </head>
 <body>
 	<div class="page">
+		<div class="share-and-print">
+<!-- 			<h3>
+				Share or Print your Selections
+			</h3> -->
+			<div class="print">
+				<div class="print-content">
+					<table>
+						<thead>
+							<tr>
+								<th>
+									Office
+								</th>
+								<th>
+									Your Selection
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="print-button">
+					<a href="#" class="button green">
+						Print Out Your Selections
+					</a>
+				</div>
+<!-- 				<div class="share-button-container">
+					<a class='share-button button blue' href="#">
+						Share Your Selections
+					</a>
+				</div> -->
+			</div>
+		</div>			
 		<div class="wrapper">
 
 			<!-- Step1 -->
@@ -34,7 +67,7 @@
 					<div id='results'></div>
 					<div id='single-voter-detail'>
 						<h2 class='voter-name'></h2>
-						<div id='single-voter-addditional-info'>
+						<div id='single-voter-additional-info'>
 
 						</div>
 
@@ -46,7 +79,6 @@
 			<div class='step2' style='display: none'>
 				<div class='text-center'>
 					<div class='back-to-step1 button blue'><span>&#9664;</span> Clear Selections & Enter a New Name</div>
-					<div class='back-to-step1 button blue'>Only Show Active Selections</div>
 				</div>
 				<div class='ballot-description ui-description'>
 					<p>
@@ -112,46 +144,14 @@
 					</div>
 				</div>			
 			</div>
-		</div>
-		<div class="share-and-print">
-<!-- 			<h3>
-				Share or Print your Selections
-			</h3> -->
-			<div class="print">
-				<div class="print-content">
-					<table>
-						<thead>
-							<tr>
-								<th>
-									Office
-								</th>
-								<th>
-									Your Selection
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-				<div class="print-button">
-					<a href="#">
-						Print Out Your Selections
-					</a>
-				</div>
-				<div class="share-button-container">
-					<a class='share-button' href="#">
-						Share Your Selections
-					</a>
-				</div>
-			</div>
-		</div>			
+		</div>		
 	</div>	
 	<footer>
 		This is Open Source Software! <a href='https://github.com/CodeForAsheville/tools-for-voting-ballot'>View on GitHub</a>
 	</footer>
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+	<script type='text/javascript' src='js/sticky-kit.js'></script>
 	<!-- <script type='text/javascript' src='js/query-object.js'></script> -->
 	<script type='text/javascript' src='js/tabletop.js'></script>
 	<script type='text/javascript' src='js/scripts.js'></script>

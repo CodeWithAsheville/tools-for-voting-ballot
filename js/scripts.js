@@ -28,10 +28,10 @@ TFVB.election_lookup_data_processed = {};
 TFVB.display_voter_info_keys = ['id', 'county_id', 'county_desc', 'birth_age', 'dist_1_desc', 'dist_2_desc', 'mail_addr1', 'mail_city', 'mail_state', 'mail_zip', 'school_dist_abbrv', 'voter_reg_num'];
 
 
-TFVB.debug = false;
+TFVB.debug = true;
 TFVB.setupDebugTools = function(){
 	if(TFVB.debug){
-		$("#full-name").val("Patrick Conant");
+		$("#full-name").val("Jesse Michel");
 		// $("#first-name").val("Patrick");
 		// $("#last-name").val("Conant");
 
@@ -50,7 +50,7 @@ TFVB.processVoterRowClick = function(){
 
 	$("#single-voter-detail").find('.voter-name').html(TFVB.voter_record.first_name + " " +TFVB.voter_record.last_name);
 	$("#single-voter-detail h2").html("");
-	$("#single-voter-addditional-info").html("");
+	$("#single-voter-additional-info").html("");
 
 	// Start the lookup! 
 
@@ -62,12 +62,12 @@ TFVB.processVoterRowClick = function(){
 		// Temp disable
 		if($.inArray(key, TFVB.display_voter_info_keys) > -1){
 
-			$("#single-voter-addditional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key.replace("_", " ").toUpperCase() + ":</span>" + " <span class='voter-info-value'>" + row + "</span></div>");
+			$("#single-voter-additional-info").append("<div class='voter-info-row'><span class='voter-info-key'>" + key.replace("_", " ").toUpperCase() + ":</span>" + " <span class='voter-info-value'>" + row + "</span></div>");
 		}
 	}
 
 	TFVB.filterVoterElections();
-	$(".step2, .share-and-print").fadeIn();
+	$(".step2").fadeIn();
 
 }
 
@@ -183,7 +183,7 @@ TFVB.processVoterName = function(){
 
 	$("#results").html("Loading...");
 	$("#single-voter-detail h2").html("");
-	$("#single-voter-addditional-info").html("");
+	$("#single-voter-additional-info").html("");
 
 	// $("#results").html(TFVB.first_name + ": " + TFVB.last_name);
 	TFVB.getVoterInfo();

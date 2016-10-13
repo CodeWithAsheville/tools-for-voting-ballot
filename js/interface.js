@@ -37,18 +37,22 @@ TFVB.decodeURL = function(){
 TFVB.prePopulate = function(){
 console.log('loaded selections: ', TFVB.loaded_selections);
 
-	$('.ballot-section').hide();
+	$('.ballot-section').hide();	
 
 	for(var item in TFVB.loaded_selections){
-			$(".ballot-section[data-election-name='" + item + "']").show();
 
-		if(TFVB.loaded_selections[item]){
+		if(TFVB.loaded_selections[item] !== 'null'){
+			$(".ballot-section[data-election-name='" + item + "']").fadeIn();
+		}
+
+		if(TFVB.loaded_selections[item] && TFVB.loaded_selections[item] !== 'null'){
 			var search_elm = $('[data-election-name="'+item+'"]').find('[data-candidate-name="'+TFVB.loaded_selections[item]+'"]').parents('li').find('a.select-candidate');
 			if(search_elm.length){
 				search_elm.trigger('click');
 			  	TFVB.prePopulateMode = true;
 		  	}
 		}
+		TFVB.populatePrint(TFVB.loaded_selections, item);
 	}
 }
 
@@ -56,7 +60,6 @@ TFVB.populateCandidates = function(){
 	og_tag_url = 'https://codeforasheville.github.io/tools-for-voting-ballot/index.html?';
 	TFVB.selectedCandidates = {};
 	selections_string = '';
-	$('.print-content tbody').empty();
 
 	if(! $('.ballot-section:visible').length){
 		return;
@@ -79,13 +82,15 @@ TFVB.populateCandidates = function(){
 	var count = 0;
 	var selections_size = Object.keys(TFVB.selectedCandidates).length;
 	
+	$('.print-content tbody').empty();
 	for(var item in TFVB.selectedCandidates){
 		count++;
 		selections_string += item + '=' + TFVB.selectedCandidates[item];
 		if(count < selections_size){
 			selections_string += '&';
 		}
-		$('.print-content tbody').append('<tr><td>' + item + '</td><td>' + TFVB.selectedCandidates[item] + '</td></tr>');
+		console.log(TFVB.selectedCandidates[item]);
+		TFVB.populatePrint(TFVB.selectedCandidates, item);
 	}
 	window.history.pushState(TFVB.selections_string, "candidate_select", '?' + encodeURI(selections_string));
 	og_tag_url += encodeURI(selections_string);
@@ -93,12 +98,21 @@ TFVB.populateCandidates = function(){
 	og_tag_url = "http://manet-8190b033-1.46ae6747.cont.dockerapp.io:32782/?delay=3000&url=" + og_tag_url;
 	$('meta[property=og\\:url]').attr('content', og_tag_url);
 	$('.share-button').attr('href', og_tag_url);
+
+	$('.share-and-print').fadeIn();
+}
+
+TFVB.populatePrint = function(object, key){
+	console.log('populate print: ' + object[key]);
+	if(object[key] !== 'null'){
+		$('.print-content tbody').append('<tr><td>' + key + '</td><td>' + object[key] + '</td></tr>');
+	}
 }
 
 TFVB.activateStep1 = function(){
 	$(".step1").fadeIn('slow');
 	$("#full-name").focus();
-
+	$('.share-and-print').fadeOut();
 }
 TFVB.activateStep2 = function(){
 	$(".step2, .share-and-print").fadeIn('slow');
@@ -106,8 +120,9 @@ TFVB.activateStep2 = function(){
 
 TFVB.backToStep1 = function(){
 	$(".step2").fadeOut('fast', function(){
+		$('#results, .voter-name, #single-voter-additional-info').empty();
 		$(".step1").fadeIn('slow');
-		$("#full-name").focus();
+		$("#full-name").val('').focus();
 		window.history.pushState("test123", "test1234", window.location.pathname);
 		$('li.selected').removeClass('selected');
 	});
@@ -146,4 +161,14 @@ $(document).ready(function(){
 	else{
 		// TFVB.activateStep1();
 	}
+	$(".share-and-print").stick_in_parent({
+		// offset_top: '100%'
+	});
+	// og_tag_url += encodeURI(TFVB.loaded_selections);
+
+	// og_tag_url = "http://manet-8190b033-1.46ae6747.cont.dockerapp.io:32782/?delay=3000&url=" + og_tag_url;
+	// $('meta[property=og\\:url]').attr('content', og_tag_url);
+	// $('.share-button').attr('href', og_tag_url);
+
+	// $('.share-and-print').fadeIn();	
 });
