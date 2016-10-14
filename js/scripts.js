@@ -87,7 +87,8 @@ TFVB.processVoterRowClick = function(){
 	TFVB.getVoterBallot();
 
 	TFVB.filterVoterElections();
-	$(".step2").fadeIn();
+	$(".step2, .show-voter-info").fadeIn();
+	$("#results h3").hide();
 
 }
 
@@ -158,7 +159,7 @@ TFVB.processVoterSearchResults = function(results){
 			}
 
 			results_div.append("<div>" + 
-									"<div class='voter-row' data-voter-index='"+index+"' style='color: blue; text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (Age " + row.birth_age + ")</div>" +
+									"<div class='voter-row' data-voter-index='"+index+"' style='text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (Age " + row.birth_age + ")</div>" +
 								"</div>"
 								);
 		}
@@ -201,7 +202,7 @@ TFVB.processVoterName = function(){
 		TFVB.voter_age = $("#voter-age").val();
 	}
 
-	$("#results").html("Loading...");
+	$("#results").html("Loading...<img class='spinner small' src='img/spinner.svg'/>");
 	$("#single-voter-detail h2").html("");
 	$("#single-voter-additional-info").html("");
 

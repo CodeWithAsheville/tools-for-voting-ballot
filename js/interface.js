@@ -57,6 +57,7 @@ console.log('loaded selections: ', TFVB.loaded_selections);
 		  	}
 		}
 		TFVB.populatePrint(TFVB.loaded_selections, item);
+		$('.spinner').fadeOut('slow');
 	}
 }
 
@@ -116,8 +117,8 @@ TFVB.populatePrint = function(object, key){
 
 TFVB.activateStep1 = function(){
 	$(".step1").fadeIn('slow');
+	$(".spinner").fadeOut('slow');
 	$("#full-name").focus();
-	$('.share-and-print').fadeOut();
 }
 TFVB.activateStep2 = function(){
 	$(".step2, .share-and-print").fadeIn('slow');
@@ -125,6 +126,7 @@ TFVB.activateStep2 = function(){
 
 TFVB.backToStep1 = function(){
 	$(".step2").fadeOut('fast', function(){
+		$('.share-and-print, .sample-ballot-button-container').fadeOut();
 		$('#results, .voter-name, #single-voter-additional-info').empty();
 		$(".step1").fadeIn('slow');
 		$("#full-name").val('').focus();
@@ -135,6 +137,11 @@ TFVB.backToStep1 = function(){
 
 TFVB.printMode = function(e){
 	window.print();
+	e.preventDefault();
+}
+
+TFVB.dropDownMenu = function(e){
+	$(this).next('.dropdown').slideToggle();
 	e.preventDefault();
 }
 
@@ -154,12 +161,12 @@ $(document).on('click', '.select-candidate', TFVB.selectCandidate);
 $(document).on('click', '.candidate-info-learnmore a', TFVB.learnMoreCandidate);
 $(document).on('click', '.back-to-step1', TFVB.backToStep1);
 $(document).on('click', '.print-button', TFVB.printMode);
+$(document).on('click', '.dropdown-activate', TFVB.dropDownMenu);
 
 $(document).ready(function(){
 	TFVB.loaded_selections = TFVB.decodeURL();
 
 	$(".share-and-print").stick_in_parent({
-		// offset_top: '100%'
 	});
 	// og_tag_url += encodeURI(TFVB.loaded_selections);
 
