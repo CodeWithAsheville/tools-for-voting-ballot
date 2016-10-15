@@ -81,9 +81,9 @@ h4{
     margin: auto;
     position: absolute;
     left: 0;
-    right: 0;  
+    right: 0;
     top: 0;
-    bottom: 0;  
+    bottom: 0;
 }
 
 .actions a{
@@ -95,7 +95,7 @@ h4{
     display: inline-block;
     text-decoration: none;
     min-width: 120px;
-    text-align: center;    
+    text-align: center;
 }
 
 @media(max-width: 720px){
@@ -166,12 +166,12 @@ h4{
 
 .ballot-section-options li {
     -webkit-transition: all .2s; /* Safari */
-    transition: all .2s;    
+    transition: all .2s;
 }
 
 .candidate-party{
     text-transform: uppercase;
-} 
+}
 
 .ballot-section-options li input{
     width: 100%;
@@ -290,6 +290,10 @@ h3.candidate-name {
     display:none;
 }
 
+.candidate-website{
+    display:none;
+}
+
 .candidate-info-container {
 	width: 100%;
     text-align: center;
@@ -329,6 +333,11 @@ h3.candidate-name {
         margin-top: 5px;
         display: block;
     }
+    .candidate-website a{
+        width: 100%;
+        margin-top: 5px;
+        display: block;
+    }
 }
 
 .candidate-info p{
@@ -338,6 +347,15 @@ h3.candidate-name {
 .candidate-info a{
     margin-right: 20px;
 }
+
+.candidate-website p{
+    text-align: center;
+}
+
+.candidate-website a{
+    margin-right: 20px;
+}
+
 
 .candidate-info-learnmore:after {
 	/*content: "\2304" !important;*/
@@ -450,7 +468,7 @@ li.unaffiliated {
     .voter-info-value{
         clear: both;
         display: block;
-    } 
+    }
 }
 
 .step1{
@@ -468,7 +486,7 @@ li.unaffiliated {
 @media(max-width: 720px){
     .step1 form{
         padding: 20px;
-    }     
+    }
 }
 
 .step1 form h1, h2{
@@ -613,12 +631,12 @@ td{
     .share-and-print{
         bottom: 0;
         top: 0;
-    }   
+    }
 }
 
 .election-description-link-list{
     overflow: hidden;
-    
+
 }
 .election-description-link-list li{
     display: list-item;

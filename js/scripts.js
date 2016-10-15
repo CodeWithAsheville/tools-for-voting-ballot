@@ -10,7 +10,7 @@ TFVB.voter_age = false;
 TFVB.voter_registration_api_base = "https://cfa-voting-api-2016.herokuapp.com/api";
 TFVB.voter_ballot_api_call = "/ballot";
 
-TFVB.election_description_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_races.csv";
+//TFVB.election_description_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_races.csv";
 TFVB.election_lookup_sheet = "1md9fVzlgIGW09mbdPYR8oNj5CEEhHNTcjsNeTzij6YM";
 // TFVB.election_lookup_sheet = "https://raw.githubusercontent.com/CodeForAsheville/tools-for-voting-ballot/master/election_lookup.csv";
 
@@ -36,7 +36,7 @@ TFVB.setupDebugTools = function(){
 		// $("#first-name").val("Patrick");
 		// $("#last-name").val("Conant");
 
-		$("#enter-name").click();		
+		$("#enter-name").click();
 	}
 }
 
@@ -51,7 +51,7 @@ TFVB.setVoterBallotURL = function(response){
 
 TFVB.getVoterBallot = function(){
 	var voter_api_request_url = TFVB.voter_registration_api_base + TFVB.voter_ballot_api_call + "?voternum="+TFVB.voter_record.voter_reg_num;
-	
+
 	console.log('voter ballot call', voter_api_request_url);
 
 	$.get(voter_api_request_url, TFVB.setVoterBallotURL);
@@ -70,7 +70,7 @@ TFVB.processVoterRowClick = function(){
 	$("#single-voter-detail h2").html("");
 	$("#single-voter-additional-info").html("");
 
-	// Start the lookup! 
+	// Start the lookup!
 
 	for(key in TFVB.voter_record){
 		row = TFVB.voter_record[key];
@@ -136,7 +136,7 @@ TFVB.filterVoterElections = function(){
 	// $(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
 	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION AT- LARGE']").show();
 
-// 
+//
 };
 
 TFVB.processVoterSearchResults = function(results){
@@ -158,7 +158,7 @@ TFVB.processVoterSearchResults = function(results){
 				continue;
 			}
 
-			results_div.append("<div>" + 
+			results_div.append("<div>" +
 									"<div class='voter-row' data-voter-index='"+index+"' style='text-decoration: underline; cursor: pointer;'>" + row.first_name + " " + row.last_name + " (Age " + row.birth_age + ")</div>" +
 								"</div>"
 								);
@@ -170,7 +170,7 @@ TFVB.processVoterSearchResults = function(results){
 TFVB.getVoterInfo = function(){
 
 	var voter_registration_request_url = TFVB.voter_registration_api_base + "?fname="+TFVB.first_name+"&lname="+TFVB.last_name;
-	
+
 	console.log('voter registration call', voter_registration_request_url);
 
 	if(TFVB.voter_age){
@@ -238,10 +238,10 @@ TFVB.getPartyFromAbrev = function(input){
 	}
 	else if(input == "UNA"){
 		return "unaffiliated";
-	}		
+	}
 	else if(input == "REF"){
 		return "referendum";
-	}	
+	}
 	else{
 		return "";
 	}
@@ -250,7 +250,7 @@ TFVB.getPartyFromAbrev = function(input){
 console.log('lookup: ', TFVB.election_lookup_data_processed);
 
 TFVB.renderElectionRaces = function(){
-	var candiate_template = $(".ballot-section-options").find('li').eq(0).clone();
+	var candidate_template = $(".ballot-section-options").find('li').eq(0).clone();
 	$(".ballot-section-options").find('li').remove();
 
 	var ballot_section_template = $(".ballot-section").clone();
@@ -268,34 +268,51 @@ TFVB.renderElectionRaces = function(){
 			candidate = election_race[candidate_index];
 			// console.log('candidate', candidate);
 
-			var active_candidate = candiate_template.clone();
+			var active_candidate = candidate_template.clone();
 			active_candidate.find('.candidate-name').html(candidate.name_on_ballot).attr('data-candidate-name', candidate.name_on_ballot);
 			active_candidate.find('.candidate-party').html(TFVB.getPartyFromAbrev(candidate.party_candidate) );
 
-			var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
-				xpress_link += "Search on Mountain Xpress";
-			xpress_link += "</a>";
+			if (candidate.withdrawn) {
+				active_candidate.find('.candidate-info-container').html("<p>This candidate has withdrawn from the race.</p>");
+				active_candidate.find('.actions').remove();
+			}
+			else {
+				var site_link = null;
+				var site_name = (candidate.website_name)?candidate.website_name:"Campaign Website";
+				if (candidate.website) {
+					site_link = "<a target='_blank' href='" + candidate.website + "'>";
+					site_link += site_name;
+					site_link += "</a>";
+				}
+				active_candidate.find('.candidate-website p').html("");
+				if (site_link) {
+					active_candidate.find('.candidate-website p').append(site_link);
+				}
 
-			var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
-				blade_link += "Search on Asheville Blade";
-			blade_link += "</a>";
+				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
+					xpress_link += "Search on Mountain Xpress";
+				xpress_link += "</a>";
 
-			var act_link = "<a target='_blank' href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
-				act_link += "Search on Asheville Citizen Times ";
-			act_link += "</a>";
+				var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
+					blade_link += "Search on Asheville Blade";
+				blade_link += "</a>";
 
-			active_candidate.find('.candidate-info p').html("");
-			active_candidate.find('.candidate-info p').append(blade_link );
-			active_candidate.find('.candidate-info p').append(act_link );
-			active_candidate.find('.candidate-info p').append(xpress_link );		
+				var act_link = "<a target='_blank' href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
+					act_link += "Search on Asheville Citizen Times ";
+				act_link += "</a>";
 
+				active_candidate.find('.candidate-info p').html("");
+				active_candidate.find('.candidate-info p').append(blade_link );
+				active_candidate.find('.candidate-info p').append(act_link );
+				active_candidate.find('.candidate-info p').append(xpress_link );
+
+			}
 			active_candidate.removeClass('selected').addClass(TFVB.getPartyFromAbrev(candidate.party_candidate));
 
 			if(active_candidate.hasClass('referendum')){
 				active_candidate.find('a.select-candidate').text(active_candidate.find('.candidate-name').text());
 			}
-
-			active_section.find('ul').append(active_candidate);				
+			active_section.find('ul').append(active_candidate);
 
 		}
 
@@ -304,7 +321,7 @@ TFVB.renderElectionRaces = function(){
 		if(typeof TFVB.election_race_info_data_processed[election_race_name] != typeof undefined){
 			var target_elm = active_section.find('.ballot-section-info');
 			target_elm.html(TFVB.election_race_info_data_processed[election_race_name]["Short Description of Office"]);
-			
+
 			links = TFVB.election_race_info_data_processed[election_race_name]["Sources"].split(" ");
 			// console.log(links);
 
