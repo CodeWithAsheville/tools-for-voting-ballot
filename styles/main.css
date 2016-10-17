@@ -173,6 +173,12 @@ h4{
     text-transform: uppercase;
 }
 
+.candidate-website{
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
 .ballot-section-options li input{
     width: 100%;
     min-height: 30px;

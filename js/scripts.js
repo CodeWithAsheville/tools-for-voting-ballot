@@ -284,9 +284,9 @@ TFVB.renderElectionRaces = function(){
 					site_link += site_name;
 					site_link += "</a>";
 				}
-				active_candidate.find('.candidate-website p').html("");
+				active_candidate.find('.candidate-website').html("");
 				if (site_link) {
-					active_candidate.find('.candidate-website p').append(site_link);
+					active_candidate.find('.candidate-website').append(site_link);
 				}
 
 				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
