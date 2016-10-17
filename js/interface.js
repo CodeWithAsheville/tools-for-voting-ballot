@@ -36,12 +36,12 @@ TFVB.decodeURL = function(){
 
 TFVB.prePopulate = function(){
 console.log('loaded selections: ', TFVB.loaded_selections);
-	
+
 	if(typeof TFVB.loaded_selections == typeof undefined){
 		return;
 	}
 
-	$('.ballot-section').hide();	
+	$('.ballot-section').hide();
 
 	for(var item in TFVB.loaded_selections){
 		// console.log('test123', item);
@@ -72,21 +72,21 @@ TFVB.populateCandidates = function(){
 
 	$('.ballot-section:visible').each(function(){
 		office = $(this).attr('data-election-name');
-		selected_candidate = $(this).find('.selected').find('.candidate-name').text();	
+		selected_candidate = $(this).find('.selected').find('.candidate-name').text();
 
 		if(! selected_candidate){
 			selected_candidate = "";
 		}
 		// if(selected_candidate){
 			// if (typeof(office) != "undefined" && typeof(selected_candidate) != "undefined"){
-				TFVB.selectedCandidates[office] = selected_candidate; 
+				TFVB.selectedCandidates[office] = selected_candidate;
 			// }
 		// }
 	});
 
 	var count = 0;
 	var selections_size = Object.keys(TFVB.selectedCandidates).length;
-	
+
 	$('.print-content tbody').empty();
 	for(var item in TFVB.selectedCandidates){
 		count++;
@@ -153,7 +153,8 @@ TFVB.selectCandidate = function(e){
 }
 
 TFVB.learnMoreCandidate = function(e){
-	$(this).parents('div').siblings('.candidate-info').slideToggle();
+  $(this).parents('div').siblings('.candidate-info').slideToggle();
+  $(this).parents('div').siblings('.candidate-website').slideToggle();
 	e.preventDefault();
 }
 
@@ -174,5 +175,5 @@ $(document).ready(function(){
 	// $('meta[property=og\\:url]').attr('content', og_tag_url);
 	// $('.share-button').attr('href', og_tag_url);
 
-	// $('.share-and-print').fadeIn();	
+	// $('.share-and-print').fadeIn();
 });
