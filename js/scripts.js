@@ -132,6 +132,7 @@ TFVB.filterVoterElections = function(){
 	else{
 		$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
 	}
+
 	if (voter_municipality == 'CITY OF ASHEVILLE' || voter_municipality_abbrv == 'ASHE') {
 		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION TRANSPORTATION BONDS']").show();
 		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION HOUSING BONDS']").show();
@@ -141,6 +142,13 @@ TFVB.filterVoterElections = function(){
 		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION TRANSPORTATION BONDS']").hide();
 		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION HOUSING BONDS']").hide();
 		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION PARKS AND RECREATION BONDS']").hide();
+	}
+
+	if (voter_municipality == 'TOWN OF WOODFIN' || voter_municipality_abbrv == 'WFIN') {
+		$(".ballot-section[data-election-base-name='WOODFIN GENERAL OBLIGATION PARKS AND RECREATION BONDS']").show();
+	}
+	else {
+		$(".ballot-section[data-election-base-name='WOODFIN GENERAL OBLIGATION PARKS AND RECREATION BONDS']").hide();
 	}
 	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
 	// $(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
