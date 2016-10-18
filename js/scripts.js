@@ -98,7 +98,8 @@ TFVB.filterVoterElections = function(){
 	var voter_nc_house_district = TFVB.voter_record.nc_house_abbrv;
 	var voter_us_house_district = TFVB.voter_record.cong_dist_abbrv;
 	var voter_nc_senate_district = TFVB.voter_record.nc_senate_abbrv;
-
+	var voter_municipality = TFVB.voter_record.munic_dist_desc;
+	var voter_municipality_abbrv = TFVB.voter_record.munic_dist_abbrv;
 	var commissioner_district = TFVB.voter_record.county_commiss_abbrv.replace("COM", "");
 
 	var voter_education_district = TFVB.voter_record.school_dist_abbrv;
@@ -131,7 +132,16 @@ TFVB.filterVoterElections = function(){
 	else{
 		$(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
 	}
-
+	if (voter_municipality == 'CITY OF ASHEVILLE' || voter_municipality_abbrv == 'ASHE') {
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION TRANSPORTATION BONDS']").show();
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION HOUSING BONDS']").show();
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION PARKS AND RECREATION BONDS']").show();
+	}
+	else {
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION TRANSPORTATION BONDS']").hide();
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION HOUSING BONDS']").hide();
+		$(".ballot-section[data-election-base-name='ASHEVILLE GENERAL OBLIGATION PARKS AND RECREATION BONDS']").hide();
+	}
 	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION']").hide();
 	// $(".ballot-section[data-election-name='BUNCOMBE COUNTY BOARD OF EDUCATION "+voter_education_district+" DISTRICT']").show();
 	// $(".ballot-section[data-election-base-name='BUNCOMBE COUNTY BOARD OF EDUCATION AT- LARGE']").show();
