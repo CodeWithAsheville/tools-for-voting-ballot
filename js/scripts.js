@@ -307,15 +307,17 @@ TFVB.renderElectionRaces = function(){
 					active_candidate.find('.candidate-website').append(site_link);
 				}
 
-				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + candidate.name_on_ballot + "'>";
+				var search_term = (candidate.search_term)?candidate.search_term:candidate.name_on_ballot;
+
+				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + search_term + "'>";
 					xpress_link += "Search on Mountain Xpress";
 				xpress_link += "</a>";
 
-				var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + candidate.name_on_ballot + "'>";
+				var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + search_term + "'>";
 					blade_link += "Search on Asheville Blade";
 				blade_link += "</a>";
 
-				var act_link = "<a target='_blank' href='http://www.citizen-times.com/search/" + candidate.name_on_ballot + "/'>";
+				var act_link = "<a target='_blank' href='http://www.citizen-times.com/search/" + search_term + "/'>";
 					act_link += "Search on Asheville Citizen Times ";
 				act_link += "</a>";
 
