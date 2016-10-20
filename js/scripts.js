@@ -307,13 +307,20 @@ TFVB.renderElectionRaces = function(){
 					active_candidate.find('.candidate-website').append(site_link);
 				}
 
+				var media_links = [false, false, false, false];
 				var search_term = (candidate.search_term)?candidate.search_term:candidate.name_on_ballot;
+				var newsobserver_link = "<a target='_blank' href='http://www.newsobserver.com/search/?q=";
+				 	newsobserver_link += search_term.replace(/\ /g,'+') + "'>";
+					newsobserver_link += "Search on Raleigh News & Observer";
+				newsobserver_link += "</a>";
 
-				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=" + search_term + "'>";
+				var xpress_link = "<a target='_blank' href='http://mountainx.com/?s=";
+					xpress_link += search_term.replace(/\ /g,'+') + "'>";
 					xpress_link += "Search on Mountain Xpress";
 				xpress_link += "</a>";
 
-				var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=" + search_term + "'>";
+				var blade_link = "<a target='_blank' href='http://www.ashevilleblade.com/?s=";
+					blade_link += search_term.replace(/\ /g,'+') + "'>";
 					blade_link += "Search on Asheville Blade";
 				blade_link += "</a>";
 
@@ -321,10 +328,15 @@ TFVB.renderElectionRaces = function(){
 					act_link += "Search on Asheville Citizen Times ";
 				act_link += "</a>";
 
+				var mpick = candidate.media.split(',');
+				for (var i=0; i<mpick.length; ++i) {
+					media_links[mpick[i]] = true;
+				}
 				active_candidate.find('.candidate-info p').html("");
-				active_candidate.find('.candidate-info p').append(blade_link );
-				active_candidate.find('.candidate-info p').append(act_link );
-				active_candidate.find('.candidate-info p').append(xpress_link );
+				if (media_links[0]) active_candidate.find('.candidate-info p').append(blade_link );
+				if (media_links[1]) active_candidate.find('.candidate-info p').append(act_link );
+				if (media_links[2]) active_candidate.find('.candidate-info p').append(xpress_link );
+				if (media_links[3]) active_candidate.find('.candidate-info p').append(newsobserver_link );
 
 			}
 			active_candidate.removeClass('selected').addClass(TFVB.getPartyFromAbrev(candidate.party_candidate));
